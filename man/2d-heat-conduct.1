@@ -1,0 +1,77 @@
+.\" Manpage for 2d-heat-conduct.
+.\" Contact sp1119s@greenwich.ac.uk to correct errors or typos.
+.TH man 1 "11 November 2020" "1.0.0" "2d-heat-conduct manpage"
+.SH NAME
+.B 2d\-heat\-conduct
+\-\- generate temperatures for a 2-dimensional heat conductivity problem
+.SH SYNOPSIS
+.B 2d-heat-conduct
+[\fB\-h\fR | \fB\-\-help\fR]
+[\fB\-p\fR | \fB\-\-noprint\fR]
+[\fB\-v\fR | \fB\-\-verbose\fR]
+[\fB\-V\fR | \fB\-\-version\fR]
+[\fB\-w\fR | \fB\-\-wtime\fR]
+[\fB\-a\fR | \fB\-\-algorithm \fIALGORITHM\fR]
+[\fB\-c\fR | \fB\-\-chunk \fICHUNK\-SIZE\fR]
+[\fB\-d\fR | \fB\-\-degrees \fILEFT\-TEMP, RIGHT\-TEMP, TOP\-TEMP, BOTTOM\-TEMP\fR]
+[\fB\-s\fR | \fB\-\-size \fIX Y\fR]
+[\fB\-S\fR | \fB\-\-schedule \fISCHEDULE\fR]
+[\fB\-t\fR | \fB\-\-tolerance \fITOLERANCE\fR]
+[\fB\-T\fR | \fB\-\-threads \fITHREADS\fR]
+.SH DESCRIPTION
+.B 2d\-heat\-conduct
+uses either a Jacobi or Gauss-Seidel algorithm to calculate and print temperature ranges for a 2-dimensional heat conductivity problem of variable sizes. It utilises
+.B OpenMP
+directives to improve parallel performance for large problem domains.
+.SH OPTIONS
+.TP
+.BR \-h ", " \-\-help\fR
+Print help synopsis.
+.TP
+.BR \-p ", " \-\-noprint\fR
+Set no printing option.
+.TP
+.BR \-v ", " \-\-verbose\fR
+Enable vervose output.
+.TP
+.BR \-V ", " \-\-version\fR
+Print version number.
+.TP
+.BR \-w ", " \-\-wtime\fR
+Enable and print execution wall\-clock time statistics.
+.TP
+.BR \-a ", " \-\-algorithm =\fIALGORITHM\fR
+Use
+\fIjacobi\fR
+or
+\fIgauss\fR
+as the argument for algorithm choice.
+.TP
+.BR \-c ", " \-\-chunk=\fICHUNK\-SIZE\fR
+Takes an integer as an argument to set the chunk size for parallel execution. By default the value is \fI0\fR if not specified, which sets the default chunk size according to
+.B OpenMP
+implementation. Valid values are \fI0\fR to \fI256\fR.
+.TP
+.BR \-d ", " \-\-degrees=\fILEFT\-TEMP\fR " "\fIRIGHT\-TEMP\fR " "\fITOP\-TEMP\fR " "\fIBOTTOM\-TEMP\fR
+Defines temperature boundary conditions for left, right, top and bottom of a two-dimensional rectangle. Decimal values for each boundary can range from above 0 to 1000.0 degrees.
+.TP
+.BR \-s ", " \-\-size=\fIX\fR " "\fIY\fR
+Specifies the problem size with \fIX\fR and \fIY\fR as integer values from 1 to 1000.
+.TP
+.BR \-S ", " \-\-schedule=\fISCHEDULE\fR
+Determines the type of
+.B OpenMP
+scheduler to use at runtime. Valid options are \fIstatic\fR (default), \fIdynamic\fR, \fIguided\fR or \fIauto\fR.
+.TP
+.BR \-t ", " \-\-tolerance=\fITOLERANCE\fR
+Sets the tolerance for calculation. Valid values are \fI0.00001\fR to \fI1.0\fR.
+
+.TP
+.BR \-T ", " \-\-threads=\fITHREADS\fR
+Sets the number of
+.B OpenMP
+threads for parallel execution. The value can range between \fI1\fR and \fI256\fR.
+.SH BUGS
+No known bugs.
+.SH AUTHOR
+Stacey Pellegrino (sp1119s@greenwich.ac.uk)
